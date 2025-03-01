@@ -1,0 +1,10 @@
+.venv/
+.env/
+__init__.py
+.idea/
+.idea/misc.xml
+.idea/CurrencyHub.iml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/modules.xml
+.idea/vcs.xml
