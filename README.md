@@ -21,4 +21,3 @@ CurrencyHub is a simple and intuitive currency converter application that levera
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/filipmarinca/CurrencyHub.git
-   cd CurrencyHub
