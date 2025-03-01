@@ -1,6 +1,7 @@
 .venv/
 .env/
 __init__.py
+__pycache__
 .idea/
 .idea/misc.xml
 .idea/CurrencyHub.iml
