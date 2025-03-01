@@ -2,17 +2,24 @@ from src.webscrapping import Webscraper
 from src.converter import CurrencyConverter
 import streamlit as st
 
+# Set up the Streamlit interface
 st.title("Welcome to CurrencyHub!")
 st.image("https://cdn.corporatefinanceinstitute.com/assets/foreign-exchange-1024x684.jpeg")
 
+
+# Initialize the web scraper to fetch currency data
 scraper = Webscraper("https://www.cursbnr.ro/")
 rates = scraper.get_currency_data()
+
+# Initialize the currency converter with the fetched rates
 converter = CurrencyConverter(rates)
 
+# User input for currency conversion
 from_currency = st.selectbox('From which currency', ('RON', 'USD', 'EUR', 'GBP', 'CHF', 'BGN', 'HUF'))
 to_currency = st.selectbox('To which currency', ('EUR', 'USD', 'RON', 'GBP', 'CHF', 'BGN', 'HUF'))
 amount = st.text_input('Enter the amount here: ')
 
+# Sidebar information
 st.sidebar.title("About CurrencyHub")
 st.sidebar.info(
     """
@@ -21,6 +28,7 @@ st.sidebar.info(
     """
 )
 
+# Handle the conversion when the submit button is clicked
 if st.button('Submit'):
     if not amount:
         st.error("Please enter an amount")
