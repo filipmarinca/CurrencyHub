@@ -1,10 +1,11 @@
+"""CurrencyConverter module"""
 class CurrencyConverter:
-    # Initializes the CurrencyConverter with a dictionary of exchange rates.
+    """Initializes the CurrencyConverter with a dictionary of exchange rates."""
     def __init__(self, currency_data):
         self.currency_data = currency_data
 
     def convert(self, amount, from_currency, to_currency):
-        # Converts an amount from one currency to another using the provided exchange rates.
+        """Converts an amount from one currency to another using the provided exchange rates."""
         if from_currency == "RON":
             rate_from = 1
         else:

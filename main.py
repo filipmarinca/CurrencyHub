@@ -1,6 +1,7 @@
+"""Main module"""
+import streamlit as st
 from src.webscrapping import Webscraper
 from src.converter import CurrencyConverter
-import streamlit as st
 
 # Set up the Streamlit interface
 st.title("Welcome to CurrencyHub!")
@@ -15,9 +16,11 @@ rates = scraper.get_currency_data()
 converter = CurrencyConverter(rates)
 
 # User input for currency conversion
-from_currency = st.selectbox('From which currency', ('RON', 'USD', 'EUR', 'GBP', 'CHF', 'BGN', 'HUF'))
-to_currency = st.selectbox('To which currency', ('EUR', 'USD', 'RON', 'GBP', 'CHF', 'BGN', 'HUF'))
+currency_values = ('RON', 'USD', 'EUR', 'GBP', 'CHF', 'BGN', 'HUF')
+from_currency = st.selectbox('From which currency', currency_values)
+to_currency = st.selectbox('To which currency', currency_values)
 amount = st.text_input('Enter the amount here: ')
+
 
 # Sidebar information
 st.sidebar.title("About CurrencyHub")
