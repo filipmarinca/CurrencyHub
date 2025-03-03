@@ -1,4 +1,4 @@
-"""Main module"""
+"""Exchange rate app CurrencyHub"""
 import streamlit as st
 from src.webscrapping import Webscraper
 from src.converter import CurrencyConverter
