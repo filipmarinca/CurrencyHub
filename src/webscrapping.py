@@ -6,7 +6,7 @@ class Webscraper:
     def __init__(self, url):
         self.url = url
         self.response = requests.get(self.url)
-        self.soup = BeautifulSoup(self.response.content, "html.parser")
+        self.soup = BeautifulSoup(self.response.content, "lxml")
         self.table = self._get_table_with_currencies()
     # Extracts the table containing currency data from the parsed HTML.
     def _get_table_with_currencies(self):
