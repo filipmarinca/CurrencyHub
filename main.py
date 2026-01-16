@@ -193,7 +193,7 @@ with col1:
         )
     
     with swap_col:
-        st.markdown("<div style='margin-top: 2rem;'>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
         if st.button("⇄", help="Swap currencies"):
             # Swap the currencies
             st.session_state.from_curr, st.session_state.to_curr = st.session_state.to_curr, st.session_state.from_curr
