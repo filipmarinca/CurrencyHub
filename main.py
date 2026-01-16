@@ -123,15 +123,23 @@ def fetch_currency_data():
         scraper = Webscraper("https://www.cursbnr.ro/")
         return scraper.get_currency_data()
     except Exception as e:
-        st.error(f"Failed to fetch currency data: {str(e)}")
-        return {}
+        # Fallback to mock data for demo purposes
+        st.warning(f"Using demo data. Could not fetch live rates: {str(e)[:100]}")
+        return {
+            'USD': 4.9234,
+            'EUR': 4.9756,
+            'GBP': 5.8123,
+            'CHF': 5.6234,
+            'BGN': 2.5431,
+            'HUF': 0.0135
+        }
 
 # Fetch rates
 with st.spinner('Loading latest exchange rates...'):
     rates = fetch_currency_data()
 
 if not rates:
-    st.error("Unable to load currency data. Please try again later.")
+    st.error("Unable to load currency data. Please check your internet connection.")
     st.stop()
 
 # Initialize converter
