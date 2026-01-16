@@ -74,7 +74,7 @@ class Webscraper:
                 if value > 0:  # Only include positive rates
                     currency_info[currency] = value
                     
-            except (ValueError, IndexError) as e:
+            except (ValueError, IndexError):
                 # Skip rows that can't be parsed
                 continue
         

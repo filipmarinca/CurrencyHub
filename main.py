@@ -159,6 +159,12 @@ currency_flags = {
 # Available currencies
 currency_values = ('RON', 'USD', 'EUR', 'GBP', 'CHF', 'BGN', 'HUF')
 
+# Initialize session state for swap functionality
+if 'from_curr' not in st.session_state:
+    st.session_state.from_curr = 'RON'
+if 'to_curr' not in st.session_state:
+    st.session_state.to_curr = 'USD'
+
 # Main content area
 col1, col2 = st.columns([3, 2])
 
@@ -172,9 +178,12 @@ with col1:
         from_currency = st.selectbox(
             'From Currency',
             currency_values,
+            index=currency_values.index(st.session_state.from_curr),
             format_func=lambda x: f"{currency_flags.get(x, '')} {x}",
-            key='from_currency'
+            key='from_currency_select'
         )
+        st.session_state.from_curr = from_currency
+        
         amount = st.number_input(
             'Amount',
             min_value=0.01,
@@ -186,23 +195,20 @@ with col1:
     with swap_col:
         st.markdown("<div style='margin-top: 2rem;'>", unsafe_allow_html=True)
         if st.button("⇄", help="Swap currencies"):
-            # Swap logic handled by session state
-            st.session_state.swap_clicked = True
+            # Swap the currencies
+            st.session_state.from_curr, st.session_state.to_curr = st.session_state.to_curr, st.session_state.from_curr
+            st.rerun()
     
     with input_col2:
         to_currency = st.selectbox(
             'To Currency',
             currency_values,
-            index=1 if currency_values[0] != 'USD' else 2,
+            index=currency_values.index(st.session_state.to_curr),
             format_func=lambda x: f"{currency_flags.get(x, '')} {x}",
-            key='to_currency'
+            key='to_currency_select'
         )
+        st.session_state.to_curr = to_currency
         st.markdown("<div style='margin-top: 2.4rem;'></div>", unsafe_allow_html=True)
-    
-    # Handle swap
-    if hasattr(st.session_state, 'swap_clicked') and st.session_state.swap_clicked:
-        st.session_state.swap_clicked = False
-        st.rerun()
     
     # Convert button
     if st.button('🔄 Convert', type="primary"):
@@ -253,7 +259,8 @@ with col1:
                     label=f"{currency_flags.get(from_c, '')} {from_c} → {currency_flags.get(to_c, '')} {to_c}",
                     value=f"{rate:.4f}"
                 )
-            except:
+            except Exception:
+                # Skip currencies that can't be converted
                 pass
 
 with col2:
